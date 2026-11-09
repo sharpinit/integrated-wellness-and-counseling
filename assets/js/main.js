@@ -6,7 +6,7 @@
   const toggle = header?.querySelector(".menu-toggle");
   if (!header || !toggle) return;
 
-  const desktop = window.matchMedia("(min-width: 64em)");
+  const desktop = window.matchMedia("(min-width: 80em)");
 
   const setOpen = (open) => {
     toggle.setAttribute("aria-expanded", String(open));

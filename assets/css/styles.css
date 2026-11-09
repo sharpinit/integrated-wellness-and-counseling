@@ -7,7 +7,8 @@
    Units: html is 62.5%, so 1rem = 10px and 1.6rem = 16px. Every size token
    below is a multiple of 4px (0.4rem). Media queries use em, which are always
    based on the browser default (16px), not on the 62.5% root.
-   Breakpoints: 48em (768px) tablet, 64em (1024px) desktop.
+   Breakpoints: 48em (768px) tablet, 64em (1024px) desktop,
+   80em (1280px) full header nav.
    ========================================================================== */
 
 @layer reset, tokens, base, layout, components, utilities;
@@ -15,24 +16,21 @@
 /* --------------------------------------------------------------------------
    Fonts — self-hosted Latin subsets (no third-party requests, no FOIT)
    -------------------------------------------------------------------------- */
+/* Variable fonts: one file per family covers every weight we use.
+   The weight range is limited to the weights the design system allows. */
 @font-face {
-  font-family: "Marcellus";
-  src: url("../fonts/marcellus-400.woff2") format("woff2");
-  font-weight: 400;
+  font-family: "Cormorant Garamond";
+  src: url("../fonts/cormorant-garamond-var.woff2") format("woff2-variations"),
+       url("../fonts/cormorant-garamond-var.woff2") format("woff2");
+  font-weight: 500 600;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Source Sans 3";
-  src: url("../fonts/source-sans-3-400.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Source Sans 3";
-  src: url("../fonts/source-sans-3-700.woff2") format("woff2");
-  font-weight: 700;
+  font-family: "Manrope";
+  src: url("../fonts/manrope-var.woff2") format("woff2-variations"),
+       url("../fonts/manrope-var.woff2") format("woff2");
+  font-weight: 400 700;
   font-style: normal;
   font-display: swap;
 }
@@ -90,12 +88,20 @@
     --rule: var(--border-default);
 
     /* Font families */
-    --font-display: "Marcellus", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
-    --font-body: "Source Sans 3", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+    --font-display: "Cormorant Garamond", Garamond, "EB Garamond", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    --font-body: "Manrope", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
 
-    /* Font weights */
-    --weight-regular: 400;
-    --weight-bold: 700;
+    /* Font weights — primitives (only these are shipped) */
+    --weight-regular: 400;     /* Manrope: body */
+    --weight-medium: 500;      /* Manrope: interface. Cormorant: large headings */
+    --weight-semibold: 600;    /* Cormorant only: smaller headings */
+    --weight-bold: 700;        /* Manrope only: labels, buttons, emphasis */
+
+    /* Font-weight roles */
+    --weight-heading: var(--weight-medium);        /* h1, h2 */
+    --weight-heading-small: var(--weight-semibold); /* h3 and below; holds up at small sizes */
+    --weight-ui: var(--weight-medium);             /* nav and secondary interface text */
+    --weight-label: var(--weight-bold);            /* eyebrows, buttons, action links */
 
     /* Font-size scale — 4px steps starting at 16px */
     --fs-16: 1.6rem;
@@ -115,9 +121,10 @@
     --text-label: var(--fs-16);     /* labels, captions, meta */
     --text-body: var(--fs-20);      /* running text — brief requires 18px+ */
     --text-lead: var(--fs-24);      /* intro paragraphs */
-    --text-h3: var(--fs-24);
-    --text-h2: var(--fs-32);
-    --text-display: var(--fs-44);   /* page h1 */
+    --text-h4: var(--fs-24);        /* minor headings, e.g. footer column titles */
+    --text-h3: var(--fs-28);
+    --text-h2: var(--fs-36);
+    --text-display: var(--fs-48);   /* page h1 */
 
     /* Line heights */
     --leading-tight: 1.1;
@@ -167,8 +174,8 @@
       --gutter: var(--space-40);
       --section-pad: var(--space-96);
       --text-lead: var(--fs-28);
-      --text-h3: var(--fs-28);
-      --text-h2: var(--fs-48);
+      --text-h3: var(--fs-32);
+      --text-h2: var(--fs-56);
       --text-display: var(--fs-72);
     }
   }
@@ -218,6 +225,7 @@
     background-color: var(--surface-page);
     color: var(--text);
     font-family: var(--font-body);
+    font-weight: var(--weight-regular);
     font-size: var(--text-body);
     line-height: var(--leading-body);
     text-rendering: optimizeLegibility;
@@ -227,13 +235,14 @@
   /* Headings share one rule; size is the only difference */
   h1, h2, h3 {
     font-family: var(--font-display);
-    font-weight: var(--weight-regular);
+    font-weight: var(--weight-heading);
     line-height: var(--leading-snug);
     text-wrap: balance;
     color: var(--text);
   }
   h1 { font-size: var(--text-display); line-height: var(--leading-tight); }
   h2 { font-size: var(--text-h2); line-height: var(--leading-tight); }
+  h3 { font-weight: var(--weight-heading-small); }
   h3 { font-size: var(--text-h3); }
 
   p, li { max-width: var(--measure); text-wrap: pretty; }
@@ -331,7 +340,7 @@
     padding: var(--space-12) var(--space-20);
     background: var(--color-ivory);
     color: var(--color-maroon-700);
-    font-weight: var(--weight-bold);
+    font-weight: var(--weight-label);
     border-radius: var(--radius-4);
     transform: translateY(-200%);
   }
@@ -340,7 +349,7 @@
   /* Small bold sentence-case label above headings (never all caps) */
   .eyebrow {
     font-size: var(--text-label);
-    font-weight: var(--weight-bold);
+    font-weight: var(--weight-label);
     color: var(--text-accent);
     line-height: var(--leading-snug);
   }
@@ -368,7 +377,7 @@
     background-color: var(--action-bg);
     color: var(--action-text);
     font-size: var(--fs-16);
-    font-weight: var(--weight-bold);
+    font-weight: var(--weight-label);
     line-height: var(--leading-snug);
     text-decoration: none;
     text-align: center;
@@ -392,14 +401,19 @@
   @media (min-width: 48em) { .btn { font-size: var(--fs-20); padding-inline: var(--space-32); } }
 
   /* Text link with arrow — for "read more" style paths */
+  /* Inline so the arrow stays with the last word when the text wraps;
+     padding keeps the target at 44px or taller */
   .link-arrow {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-8);
-    min-height: var(--tap-target);
-    font-weight: var(--weight-bold);
+    display: inline-block;
+    padding-block: var(--space-8);
+    font-weight: var(--weight-label);
   }
-  .link-arrow::after { content: "→"; transition: transform var(--duration-fast) var(--ease-out); }
+  .link-arrow::after {
+    content: "→";
+    display: inline-block;
+    margin-left: var(--space-8);
+    transition: transform var(--duration-fast) var(--ease-out);
+  }
   .link-arrow:hover::after { transform: translateX(var(--space-4)); }
 
   /* ---------- Header ---------- */
@@ -415,10 +429,11 @@
   .site-header__logo img { width: auto; height: 5.6rem; }
   .site-header__call {
     margin-left: auto;
+    white-space: nowrap;
     display: inline-flex;
     align-items: center;
     min-height: var(--tap-target);
-    font-weight: var(--weight-bold);
+    font-weight: var(--weight-label);
   }
   .menu-toggle {
     display: inline-flex;
@@ -430,7 +445,7 @@
     border-radius: var(--radius-4);
     background: transparent;
     font-size: var(--fs-16);
-    font-weight: var(--weight-bold);
+    font-weight: var(--weight-label);
     cursor: pointer;
   }
   .menu-toggle__icon,
@@ -462,9 +477,11 @@
   .site-nav__list a {
     display: flex;
     align-items: center;
+    white-space: nowrap;
     min-height: var(--tap-target);
     text-decoration: none;
   }
+  .site-nav__list a:not(.btn) { font-weight: var(--weight-ui); }
   .site-nav__list a:not(.btn):hover,
   .site-nav__list a[aria-current="page"] { text-decoration: underline; }
   .site-nav__cta { margin-top: var(--space-8); }
@@ -472,8 +489,9 @@
   /* Without JS the menu stays open; JS sets data-menu to collapse it */
   .site-header[data-menu="closed"] .site-nav { display: none; }
 
-  @media (min-width: 64em) {
-    .site-header__bar { flex-wrap: nowrap; gap: var(--space-32); }
+  /* Full nav needs ~1240px with Manrope, so it gets its own breakpoint */
+  @media (min-width: 80em) {
+    .site-header__bar { flex-wrap: nowrap; gap: var(--space-24); }
     .site-header__call { order: 3; margin-left: 0; }
     .menu-toggle { display: none; }
     .site-header[data-menu] .site-nav { display: block; }
@@ -481,11 +499,12 @@
     .site-nav__list {
       flex-direction: row;
       align-items: center;
-      gap: var(--space-24);
+      gap: var(--space-20);
       padding: 0;
       border: 0;
     }
     .site-nav__list a { font-size: var(--fs-16); }
+    .site-nav__list .btn { padding-inline: var(--space-20); }
     .site-nav__cta { margin-top: 0; }
   }
 
@@ -544,7 +563,8 @@
     border-radius: var(--radius-pill);
     color: var(--text-accent);
     font-family: var(--font-display);
-    font-size: var(--fs-24);
+    font-weight: var(--weight-heading-small);
+    font-size: var(--fs-28);
   }
   .steps__item > * { grid-column: 2; }
   .steps__item > h3 { grid-row: 1; align-self: center; }
@@ -589,6 +609,7 @@
   }
   .note__quote {
     font-family: var(--font-display);
+    font-weight: var(--weight-heading-small);
     font-size: var(--text-h3);
     line-height: var(--leading-snug);
   }
@@ -600,7 +621,7 @@
     gap: var(--space-40);
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
   }
-  .site-footer h2 { font-size: var(--fs-20); }
+  .site-footer h2 { font-size: var(--text-h4); font-weight: var(--weight-heading-small); }
   .site-footer__list { display: grid; gap: var(--space-4); }
   .site-footer__list a,
   .site-footer__legal a {
