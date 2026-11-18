@@ -653,7 +653,6 @@
     color: var(--color-umber-600);
     font-size: var(--text-label);
   }
-
   /* ---------- Photos ----------
      Every photo uses its original, uncropped file. The frame sets the shape,
      and the image fills it. Framing is set per spot under "Photo framing" below. */
