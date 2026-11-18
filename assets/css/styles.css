@@ -683,9 +683,9 @@
      --frame-zoom   1 shows the whole photo; 1.2 zooms in 20% around the focus point
      Zoom crops the edges, so raise it in small steps and check the chin and hair. */
   .frame-about      { --frame-ratio: 1 / 1; --frame-focus: 50% 50%; --frame-zoom: 1; }
-  .frame-healthcare { --frame-ratio: 1 / 1; --frame-focus: 50% 40%; --frame-zoom: 1.15; }
-  .frame-card       { --frame-ratio: 1 / 1; --frame-focus: 50% 40%; --frame-zoom: 1.2; }
-  .frame-note       { --frame-ratio: 1 / 1; --frame-focus: 50% 40%; --frame-zoom: 1.2; }
+  .frame-healthcare { --frame-ratio: 1 / 1; --frame-focus: 50% 40%; --frame-zoom: 1; }
+  .frame-card       { --frame-ratio: 1 / 1; --frame-focus: 50% 40%; --frame-zoom: 1; }
+  .frame-note       { --frame-ratio: 1 / 1; --frame-focus: 50% 40%; --frame-zoom: 1; }
 
   /* Small square image at the top of a path card */
   .card__media {
