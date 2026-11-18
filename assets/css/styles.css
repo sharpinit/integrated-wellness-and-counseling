@@ -314,9 +314,11 @@
 
   .grid--narrow { --grid-min: 26rem; }
   .grid--wide { --grid-min: 30rem; }
+  /* At most three columns: 5 items fall into 3 + 2 */
+  .grid--3 { --grid-min: max(26rem, (100% - 2 * var(--space-24)) / 3); }
 
   /* Lists, grids and forms inside a stack take the full width */
-  .stack > :is(.grid, .ticks, .steps, .faq, .form, .contact-list) { align-self: stretch; }
+  .stack > :is(.grid, .ticks, .steps, .faq, .contact-list) { align-self: stretch; }
 
   /* Two columns on desktop, stacked on phones */
   /* Columns align to the top; add .split--center where a photo sits beside text */
@@ -330,7 +332,6 @@
   .split > * { min-width: 0; }
   @media (min-width: 64em) {
     .split { grid-template-columns: 1fr 1fr; gap: var(--space-80); }
-    .split--media-first > :first-child { order: -1; }
     .split--wide-text { grid-template-columns: 7fr 5fr; }
   }
 }
@@ -339,6 +340,17 @@
    Components
    -------------------------------------------------------------------------- */
 @layer components {
+
+  /* Site-wide notice above the header (pre-opening) */
+  .site-banner {
+    padding-block: var(--space-8);
+    background-color: var(--color-maroon-900);
+    color: var(--color-ivory);
+    font-size: var(--text-label);
+    font-weight: var(--weight-ui);
+    line-height: var(--leading-snug);
+  }
+  .site-banner p { max-width: none; text-align: center;}
 
   /* Skip link — first focusable element on every page */
   .skip-link {
@@ -748,9 +760,22 @@
     font-family: var(--font-display);
     font-weight: var(--weight-heading-small);
     font-size: var(--fs-28);
+    font-variant-numeric: lining-nums;           /* full-height 1 2 3, not old-style */
+    line-height: 1;                              /* no extra space above or below the number */
+    text-box: trim-both cap alphabetic;          /* optional fine-tune; browsers without support ignore it */
   }
   .steps__item > * { grid-column: 2; }
   .steps__item > h3 { grid-row: 1; align-self: center; }
+
+  /* Compact steps inside a card (pathways): one column, smaller numbers */
+  .steps--compact { gap: var(--space-16); }
+  .steps--compact .steps__item { grid-template-columns: var(--space-32) 1fr; gap: var(--space-12); }
+  .steps--compact .steps__item::before {
+    width: var(--space-32);
+    height: var(--space-32);
+    font-size: var(--fs-20);
+  }
+  .steps--compact .steps__item > p { grid-row: 1; align-self: center; }
 
   /* Icon in place of the number (the list stays an <ol>, so order is kept) */
   .steps--icons .steps__item::before { content: none; }
@@ -771,7 +796,7 @@
     .steps--4 { grid-template-columns: repeat(2, 1fr); }
   }
   @media (min-width: 64em) {
-    .steps:not(.steps--4) { grid-template-columns: repeat(3, 1fr); }
+    .steps:not(.steps--4, .steps--compact) { grid-template-columns: repeat(3, 1fr); }
   }
   @media (min-width: 90em) {
     .steps--4 { grid-template-columns: repeat(4, 1fr); }
@@ -849,63 +874,6 @@
     border-top: var(--border-width) solid var(--border-default);
   }
 
-  /* ---------- Forms (visual only until a HIPAA-compliant service is connected) ---------- */
-  .form {
-    --stack-gap: var(--space-24);
-    align-items: stretch;
-    max-width: 64rem;
-  }
-  .field { display: grid; gap: var(--space-8); }
-  .field__label,
-  .choices legend {
-    font-size: var(--text-label);
-    font-weight: var(--weight-label);
-  }
-  .field__hint {
-    font-size: var(--text-label);
-    color: var(--text-muted);
-  }
-  .field__error {
-    font-size: var(--text-label);
-    font-weight: var(--weight-label);
-    color: var(--color-maroon-700);
-  }
-  .field__error[hidden] { display: none; }
-  .input {
-    width: 100%;
-    min-height: var(--space-48);
-    padding: var(--space-8) var(--space-12);
-    border: var(--border-width) solid var(--border-strong);
-    border-radius: var(--radius-4);
-    background-color: var(--surface-page);
-  }
-  .input:focus { border-color: var(--surface-brand); }
-  .input[aria-invalid="true"] { border: 0.2rem solid var(--color-maroon-700); }
-  .choices {
-    display: grid;
-    gap: var(--space-4);
-    min-width: 0;
-    margin: 0;
-    padding: 0;
-    border: 0;
-  }
-  .choices legend { margin-bottom: var(--space-8); padding: 0; }
-  .choice {
-    display: flex;
-    align-items: center;
-    gap: var(--space-12);
-    min-height: var(--tap-target);
-    cursor: pointer;
-  }
-  .choice input {
-    flex-shrink: 0;
-    width: 2.4rem;
-    height: 2.4rem;
-    margin: 0;
-    accent-color: var(--surface-brand);
-  }
-  .form__status:focus { outline: none; }
-
   /* ---------- FAQ: native details/summary, no script needed ---------- */
   .faq {
     max-width: 88rem;
@@ -978,17 +946,6 @@
   .ratio-4x5 { --ratio: 4 / 5; }
   .ratio-3x2 { --ratio: 3 / 2; }
 
-  .visually-hidden {
-    position: absolute !important;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    white-space: nowrap;
-    border: 0;
-  }
 }
 
 /* --------------------------------------------------------------------------
