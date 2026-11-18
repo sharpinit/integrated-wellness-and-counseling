@@ -3,14 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Brain Performance Care in Henderson, NV | Dr. Stephen Sharp</title>
+  <title>Brain Wellness and Counseling in Henderson, NV | Dr. Stephen Sharp</title>
   <meta name="claude:viewport-fit-sides" content="cover">
-  <meta name="description" content="BrainTap and Neural Chek sessions guided by Dr. Stephen Sharp, a doctor of psychology in Henderson, Nevada. Support for focus, recovery, sleep and calm under pressure.">
+  <meta name="description" content="Brain wellness sessions (NeuralChek and BrainTap) and counseling with Dr. Stephen Sharp, a doctoral-level licensed counselor in Henderson, Nevada. Telehealth in Nevada, Utah and Idaho.">
   <link rel="canonical" href="https://drsharp.org/">
   <meta name="theme-color" content="#7c1315">
   <meta name="format-detection" content="telephone=no">
 
-  <!-- Preload both variable fonts; each file covers every weight in use -->
   <link rel="preload" href="assets/fonts/cormorant-garamond-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/manrope-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/styles.css">
@@ -20,27 +19,26 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="manifest" href="site.webmanifest">
 
-  <!-- Social sharing (TODO: add og-image.jpg, 1200x630, before launch) -->
+  <!-- TODO: add assets/img/og-image.jpg (1200x630) before launch -->
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Dr. Stephen Sharp">
+  <meta property="og:site_name" content="Integrated Wellness &amp; Counseling">
   <meta property="og:title" content="Train your mind like you train your body">
-  <meta property="og:description" content="Brain performance care from a doctor of psychology in Henderson, Nevada.">
+  <meta property="og:description" content="Brain wellness sessions (NeuralChek and BrainTap) and counseling with Dr. Stephen Sharp, a doctoral-level licensed counselor in Henderson, Nevada. Telehealth in Nevada, Utah and Idaho.">
   <meta property="og:url" content="https://drsharp.org/">
   <meta property="og:image" content="https://drsharp.org/assets/img/og-image.jpg">
   <meta property="og:locale" content="en_US">
   <meta name="twitter:card" content="summary_large_image">
-
-  <!-- Local practice schema. TODO: confirm phone, street address and hours -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": ["Psychologist", "MedicalBusiness"],
+    "@type": "LocalBusiness",
     "@id": "https://drsharp.org/#practice",
-    "name": "Dr. Stephen Sharp",
-    "description": "Brain performance care with BrainTap and Neural Chek, guided by a doctor of psychology.",
+    "name": "Integrated Wellness & Counseling",
+    "description": "Brain wellness sessions (NeuralChek and BrainTap) and counseling in Henderson, Nevada, with telehealth in Nevada, Utah and Idaho.",
     "url": "https://drsharp.org/",
     "logo": "https://drsharp.org/assets/img/logo.png",
-    "telephone": "+1-702-555-0142",
+    "telephone": "+1-725-259-3889",
+    "faxNumber": "+1-928-496-2093",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Henderson",
@@ -48,15 +46,22 @@
       "addressCountry": "US"
     },
     "areaServed": [
-      { "@type": "State", "name": "Nevada" },
-      { "@type": "State", "name": "Utah" },
-      { "@type": "State", "name": "Idaho" }
+      {
+        "@type": "State",
+        "name": "Nevada"
+      },
+      {
+        "@type": "State",
+        "name": "Utah"
+      },
+      {
+        "@type": "State",
+        "name": "Idaho"
+      }
     ],
+    "paymentAccepted": "Credit card, PayPal, Zelle, Venmo",
     "founder": {
-      "@type": "Person",
-      "name": "Stephen Sharp",
-      "honorificPrefix": "Dr.",
-      "jobTitle": "Doctor of Psychology"
+      "@id": "https://drsharp.org/about.html#dr-sharp"
     }
   }
   </script>
@@ -64,18 +69,15 @@
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
 
-  <!-- ===== Header ===== -->
   <header class="site-header theme-brand">
     <div class="container site-header__bar">
-      <a class="site-header__logo" href="/" aria-label="Dr. Stephen Sharp, home">
+      <!-- Mark alone on phones, full logo from 768px; the browser loads only one -->
+      <a class="site-header__logo" href="index.html">
         <picture>
-          <source srcset="assets/img/logo.webp" type="image/webp">
-          <img src="assets/img/logo.png" alt="" width="418" height="340">
+          <source media="(min-width: 48em)" srcset="assets/img/logo-reversed.svg" width="332" height="75">
+          <img src="assets/img/mark-reversed.svg" alt="Integrated Wellness &amp; Counseling, home" width="93" height="75">
         </picture>
       </a>
-
-      <!-- TODO: replace placeholder number -->
-      <a class="site-header__call" href="tel:+17025550142">(702) 555-0142</a>
 
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" hidden>
         <span class="menu-toggle__icon" aria-hidden="true"></span>
@@ -84,207 +86,119 @@
 
       <nav class="site-nav" id="site-nav" aria-label="Main">
         <ul class="site-nav__list" role="list">
-          <li><a href="braintap-neural-chek.html">BrainTap and Neural Chek</a></li>
-          <li><a href="athletes.html">Athletes and coaches</a></li>
-          <li><a href="cognitive-health.html">Cognitive health</a></li>
-          <li><a href="about.html">About Dr. Sharp</a></li>
-          <li class="site-nav__cta"><a class="btn" href="consultation.html">Request a Private Consultation</a></li>
+          <li><a href="neuralchek-braintap.html">NeuralChek and BrainTap</a></li><li><a href="therapy-counseling.html">Therapy</a></li><li class="nav-group"><button class="nav-group__toggle" type="button" aria-expanded="true" aria-controls="nav-who">Who we help</button><ul class="nav-group__list" id="nav-who" role="list"><li><a href="focus-performance.html">Focus and performance</a></li><li><a href="cognitive-health.html">Cognitive health and vitality</a></li><li><a href="healthcare-professionals.html">For healthcare professionals</a></li></ul></li><li><a href="about.html">About</a></li><li><a href="faq.html">FAQ</a></li>
+          <li class="site-nav__cta"><a class="btn" href="get-started.html#request-consultation">Request a Private Consultation</a></li>
         </ul>
       </nav>
+
+      <a class="site-header__call" href="tel:+17252593889">725-259-3889</a>
+
+      <a class="btn site-header__cta" href="get-started.html#request-consultation">Request a Private Consultation</a>
     </div>
   </header>
 
   <main id="main">
-
-    <!-- ===== Hero ===== -->
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="container split split--wide-text">
+<section class="hero" aria-labelledby="page-title">
+  <div class="container split split--wide-text">
+    <div class="stack">
+      <p class="eyebrow">Brain wellness and counseling in Henderson, Nevada</p>
+      <h1 id="page-title">Train your mind like you train your body.</h1>
+      <p class="lead">Brain wellness sessions and counseling from a practice led by a doctoral-level licensed counselor with more than 25 years of experience. For calm, focus and recovery when the pressure is on.</p>
+      <div class="cluster"><a class="btn" href="get-started.html#book-neuralchek">Book a NeuralChek</a><a class="btn btn--outline" href="get-started.html#request-consultation">Request a Private Consultation</a></div>
+      <p class="meta">Or call <a href="tel:+17252593889">725-259-3889</a></p>
+      <ul class="ticks ticks--compact" role="list"><li><span>Doctorate in professional counseling</span></li><li><span>More than 25 years of experience</span></li><li><span>Private and confidential</span></li><li><span>Henderson, NV, with telehealth in Nevada, Utah and Idaho</span></li></ul>
+    </div>
+    <div class="media-placeholder ratio-4x5" role="img" aria-label="Placeholder: a calm adult in a moment of stillness, eyes closed, natural light (stock)">Photo: a calm adult in a moment of stillness, eyes closed, natural light (stock)</div>
+  </div>
+</section>
+<section class="section" aria-labelledby="who-title">
+  <div class="container">
+<div class="stack section-head"><h2 id="who-title">Who we help</h2></div>
+    <ul class="grid grid--narrow" role="list">
+      <li class="card stack"><h3>Focus and performance</h3><p>Staying composed under pressure, recovering well and keeping a clear head. All with complete discretion.</p><a class="link-arrow" href="focus-performance.html">Focus and performance</a></li>
+      <li class="card stack"><h3>Cognitive health and vitality</h3><p>For adults who want to stay calm, clear and confident as they age, and for the families who want a trusted guide.</p><a class="link-arrow" href="cognitive-health.html">Cognitive health and vitality</a></li>
+      <li class="card stack"><h3>Therapy and counseling</h3><p>Focused, trauma-informed care for stress, life changes and patterns that keep repeating. Specialized PTSD therapy.</p><a class="link-arrow" href="therapy-counseling.html">Therapy and counseling</a></li>
+      <li class="card stack"><h3>Healthcare professionals</h3><p>Referrals, case consultation and a clinical partner you can trust.</p><a class="link-arrow" href="healthcare-professionals.html">For healthcare professionals</a></li>
+    </ul>
+  </div>
+</section>
+<section class="section theme-alt" aria-labelledby="start-title">
+  <div class="container">
+<div class="stack section-head"><h2 id="start-title">Two ways to start</h2></div>
+    <ul class="grid" role="list">
+      <li class="card stack"><div class="card__media"><div class="media-placeholder" role="img" aria-label="Placeholder: BrainTap headset product shot (BrainTap materials)">Photo: BrainTap headset product shot (BrainTap materials)</div></div><h3>Brain wellness</h3><p>Start with a NeuralChek reading, followed by a guided BrainTap session. Our trained team runs every session in Henderson, following a program Dr. Sharp designed.</p><!-- CONFIRM: January opening --><a class="btn" href="get-started.html#book-neuralchek">Book a NeuralChek</a></li>
+      <li class="card stack"><div class="card__media"><picture class="photo frame-card"><source type="image/avif" srcset="assets/img/dr-sharp.avif 430w, assets/img/dr-sharp-320.avif 320w, assets/img/dr-sharp-160.avif 160w" sizes="16rem"><source type="image/webp" srcset="assets/img/dr-sharp.webp 430w, assets/img/dr-sharp-320.webp 320w, assets/img/dr-sharp-160.webp 160w" sizes="16rem"><img src="assets/img/dr-sharp.jpg" srcset="assets/img/dr-sharp.jpg 430w, assets/img/dr-sharp-320.jpg 320w, assets/img/dr-sharp-160.jpg 160w" sizes="16rem" alt="Dr. Stephen Sharp" width="430" height="430" loading="lazy" decoding="async"></picture></div><h3>Counseling</h3><p>Start with a private consultation with Dr. Sharp, in person or by telehealth.</p><a class="btn" href="get-started.html#request-consultation">Request a Private Consultation</a></li>
+    </ul>
+  </div>
+</section>
+<section class="section" aria-labelledby="bt-title">
+  <div class="container">
+    <div class="stack">
+      <div class="stack">
+        <h2 id="bt-title">BrainTap and NeuralChek</h2>
+        <p>BrainTap is a guided relaxation program that pairs a narrated session with gentle light and sound. NeuralChek is a brief heart rate variability (HRV) reading we use to start a conversation about stress, sleep and breathing.</p>
+        <p>Every first visit includes a short safety screening.</p>
+        <a class="link-arrow" href="neuralchek-braintap.html">Learn about NeuralChek and BrainTap</a>
+      </div>
+      <svg class="wave" viewBox="0 0 600 64" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 32 C 25 32 25 12 50 12 S 75 52 100 52 S 125 20 150 20 S 175 44 200 44 S 225 28 250 28 S 275 36 300 36 S 325 30 350 30 S 375 34 400 34 S 425 31 450 31 S 475 33 500 33 S 550 32 600 32" fill="none" stroke="currentColor" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>
+    </div>
+  </div>
+</section>
+<section class="section theme-inverse" aria-labelledby="note-title">
+  <div class="container">
+    <div class="stack">
+      <h2 id="note-title">A note from Dr. Sharp</h2>
+      <div class="byline-photo">
+        <picture class="photo photo--circle frame-note"><source type="image/avif" srcset="assets/img/dr-sharp.avif 430w, assets/img/dr-sharp-320.avif 320w, assets/img/dr-sharp-160.avif 160w" sizes="12.8rem"><source type="image/webp" srcset="assets/img/dr-sharp.webp 430w, assets/img/dr-sharp-320.webp 320w, assets/img/dr-sharp-160.webp 160w" sizes="12.8rem"><img src="assets/img/dr-sharp.jpg" srcset="assets/img/dr-sharp.jpg 430w, assets/img/dr-sharp-320.jpg 320w, assets/img/dr-sharp-160.jpg 160w" sizes="12.8rem" alt="" width="430" height="430" loading="lazy" decoding="async"></picture>
         <div class="stack">
-          <p class="eyebrow">Brain performance care in Henderson, Nevada</p>
-          <h1 id="hero-title">Train your mind like you train your body.</h1>
-          <p class="lead">Brain performance care from a doctor of psychology with more than 20 years of experience, for focus, recovery, sleep and calm under pressure.</p>
-          <div class="cluster">
-            <a class="btn" href="consultation.html">Request a Private Consultation</a>
-            <a class="link-arrow" href="braintap-neural-chek.html">How sessions work</a>
-          </div>
-          <p class="meta">Trusted by professional athletes. Private and confidential.</p>
-        </div>
-        <!-- Hero image: swap for <picture> with width/height, fetchpriority="high", no lazy-loading -->
-        <div class="media-placeholder ratio-4x5" role="img" aria-label="Placeholder: athlete in quiet focus before competition">
-          Photo: athlete in quiet focus before competition, warm natural light, no team gear
+        <blockquote class="note stack">
+          <p class="note__quote">Brain technology is moving fast, and some of it is useful. After more than 25 years in this work, I’ve learned there is no one-size-fits-all. If a tool isn’t right for you, I’ll tell you, and I’ll tell you what is.</p>
+          <footer class="meta">Dr. Stephen Sharp</footer>
+        </blockquote>
+        <a class="link-arrow" href="about.html">Read about Dr. Sharp’s approach</a>
         </div>
       </div>
-    </section>
-
-    <!-- ===== Positioning ===== -->
-    <section class="section theme-alt" aria-labelledby="why-title">
-      <div class="container split">
-        <div class="stack">
-          <p class="eyebrow">Why a psychologist</p>
-          <h2 id="why-title">Brain performance care, guided by a doctor of psychology.</h2>
-        </div>
-        <div class="stack">
-          <p>After more than 20 years helping people through stress, trauma and change, Dr. Sharp knows what moves the needle, and what doesn't.</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, ut enim ad minim veniam.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== Audience paths ===== -->
-    <section class="section" aria-labelledby="paths-title">
-      <div class="container">
-        <div class="stack section-head">
-          <p class="eyebrow">Find your path</p>
-          <h2 id="paths-title">Who we help</h2>
-        </div>
-        <ul class="grid" role="list">
-          <li class="card stack">
-            <h3>Athletes and coaches</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Focus, recovery and sleep, built around your season.</p>
-            <a class="link-arrow" href="athletes.html">Performance and recovery</a>
-          </li>
-          <li class="card stack">
-            <h3>Cognitive health and vitality</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Support for sharpness, independence and peace of mind.</p>
-            <a class="link-arrow" href="cognitive-health.html">Staying sharp</a>
-          </li>
-          <li class="card stack">
-            <h3>Already know BrainTap?</h3>
-            <p>Tell us. Every program still begins with a private consultation with Dr. Sharp, so your sessions are built around you.</p>
-            <a class="link-arrow" href="braintap-neural-chek.html">About BrainTap and Neural Chek</a>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- ===== Athletes band (dark section borrowed from Concept B) ===== -->
-    <section class="section theme-inverse" aria-labelledby="athletes-title">
-      <div class="container split">
-        <div class="stack">
-          <p class="eyebrow">For athletes and coaches</p>
-          <h2 id="athletes-title">Calm focus when it matters most.</h2>
-          <p>Private, confidential, built around your season.</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.</p>
-          <a class="btn btn--outline" href="athletes.html">Athletes and coaches</a>
-        </div>
-        <div class="stack">
-          <div class="media-placeholder ratio-3x2" role="img" aria-label="Placeholder: stillness before competition">
-            Photo: stillness before competition, eyes closed, low warm light
-          </div>
-          <svg class="wave" viewBox="0 0 600 64" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-            <path d="M0 32 C 25 32 25 12 50 12 S 75 52 100 52 S 125 20 150 20 S 175 44 200 44 S 225 28 250 28 S 275 36 300 36 S 325 30 350 30 S 375 34 400 34 S 425 31 450 31 S 475 33 500 33 S 550 32 600 32" fill="none" stroke="currentColor" stroke-width="2" vector-effect="non-scaling-stroke"/>
-          </svg>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== How it works: a real sequence, so numbered ===== -->
-    <section class="section" aria-labelledby="how-title">
-      <div class="container">
-        <div class="stack section-head">
-          <p class="eyebrow">How it works</p>
-          <h2 id="how-title">Every program starts with Dr. Sharp</h2>
-        </div>
-        <ol class="steps" role="list">
-          <li class="steps__item">
-            <h3>Start with a private consultation</h3>
-            <p>Every new client meets Dr. Sharp first. A personal conversation, not a booking widget.</p>
-          </li>
-          <li class="steps__item">
-            <h3>Dr. Sharp builds your plan</h3>
-            <p>He assesses what's going on and recommends the right approach, which may be BrainTap and Neural Chek, therapy, or both.</p>
-          </li>
-          <li class="steps__item">
-            <h3>Our team guides your sessions</h3>
-            <p>If BrainTap is part of your plan, a trained team member runs your follow-up sessions in the Henderson office.</p>
-          </li>
-        </ol>
-      </div>
-    </section>
-
-    <!-- ===== What clients use it for ===== -->
-    <section class="section theme-alt" aria-labelledby="uses-title">
-      <div class="container split">
-        <div class="stack">
-          <p class="eyebrow">BrainTap and Neural Chek</p>
-          <h2 id="uses-title">What clients use it for</h2>
-          <p>Meditation, breath and focused attention have been used for thousands of years. Modern brainwave science now measures what they do.</p>
-          <p class="meta">BrainTap isn't right for everyone. If it isn't right for you, Dr. Sharp will tell you what is.</p>
-        </div>
-        <ul class="ticks" role="list">
-          <li>Stress</li>
-          <li>Focus</li>
-          <li>Sleep</li>
-          <li>Recovery</li>
-          <li>Habits such as smoking</li>
-          <li>Alongside trauma care</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- ===== Meet Dr. Sharp ===== -->
-    <section class="section" aria-labelledby="about-title">
-      <div class="container split split--media-first">
-        <div class="stack">
-          <p class="eyebrow">Meet Dr. Sharp</p>
-          <h2 id="about-title">Open to new tools. Careful about what works.</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          <blockquote class="note stack">
-            <p class="note__quote">I recommend BrainTap only when I believe it will help.</p>
-            <footer class="meta">Dr. Stephen Sharp, doctor of psychology</footer>
-          </blockquote>
-          <a class="link-arrow" href="about.html">Read about Dr. Sharp's approach</a>
-        </div>
-        <div class="media-placeholder ratio-4x5" role="img" aria-label="Placeholder: professional headshot of Dr. Sharp">
-          Photo: professional headshot of Dr. Sharp in the Henderson office
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== Closing call to action ===== -->
-    <section class="section theme-brand" aria-labelledby="cta-title">
-      <div class="container stack">
-        <h2 id="cta-title">Start with a private consultation.</h2>
-        <p class="lead">Offices in Henderson, Nevada. Telehealth available in Nevada, Utah and Idaho.</p>
-        <div class="cluster">
-          <a class="btn" href="consultation.html">Request a Private Consultation</a>
-          <a class="link-arrow" href="tel:+17025550142">Call (702) 555-0142</a>
-        </div>
-        <p class="meta">Private and confidential. We'll be in touch within one business day.</p>
-      </div>
-    </section>
+    </div>
+  </div>
+</section>
+<section class="section theme-brand sun-band" aria-labelledby="conversation-title">
+  <div class="container stack">
+    <h2 id="conversation-title">Start with a conversation</h2>
+    <p class="lead">Tell us a little about what you’re looking for. We’ll be in touch within one business day.</p><!-- CONFIRM: response time -->
+    <div class="cluster"><a class="btn" href="get-started.html#book-neuralchek">Book a NeuralChek</a><a class="btn btn--outline" href="get-started.html#request-consultation">Request a Private Consultation</a></div>
+    <p class="meta">Or call <a href="tel:+17252593889">725-259-3889</a></p>
+    <p class="meta">Your inquiry is private and confidential.</p>
+  </div>
+</section>
+<aside class="disclaimer" aria-label="Wellness services disclaimer">
+  <div class="container"><p class="meta">BrainTap and NeuralChek are general wellness services, not medical or mental health treatment. Individual experiences vary.</p></div>
+</aside>
   </main>
 
-  <!-- ===== Footer ===== -->
   <footer class="site-footer theme-inverse">
     <div class="container">
       <div class="site-footer__grid">
         <div class="stack">
-          <h2>Dr. Stephen Sharp</h2>
-          <p class="meta">Brain performance care, guided by a doctor of psychology.</p>
+          <img class="site-footer__logo" src="assets/img/logo-reversed.svg" alt="Integrated Wellness &amp; Counseling" width="332" height="75" loading="lazy" decoding="async">
+          <p class="meta">Brain wellness and counseling in Henderson, Nevada, with telehealth in Nevada, Utah and Idaho.</p>
         </div>
         <nav aria-labelledby="footer-nav-title" class="stack stack--tight">
           <h2 id="footer-nav-title">Explore</h2>
-          <ul class="site-footer__list" role="list">
-            <li><a href="braintap-neural-chek.html">BrainTap and Neural Chek</a></li>
-            <li><a href="athletes.html">Athletes and coaches</a></li>
-            <li><a href="cognitive-health.html">Cognitive health</a></li>
-            <li><a href="about.html">About Dr. Sharp</a></li>
-          </ul>
+          <ul class="site-footer__list" role="list"><li><a href="neuralchek-braintap.html">NeuralChek and BrainTap</a></li><li><a href="therapy-counseling.html">Therapy and counseling</a></li><li><a href="focus-performance.html">Focus and performance</a></li><li><a href="cognitive-health.html">Cognitive health and vitality</a></li><li><a href="healthcare-professionals.html">For healthcare professionals</a></li><li><a href="about.html">About Dr. Sharp</a></li><li><a href="faq.html">FAQ</a></li><li><a href="get-started.html">Get started</a></li></ul>
         </nav>
         <div class="stack stack--tight">
           <h2>Visit or call</h2>
           <address class="stack stack--tight">
-            <p>Henderson, Nevada<br><!-- TODO: street address --></p>
-            <p><a href="tel:+17025550142">(702) 555-0142</a></p>
-            <p class="meta">Telehealth in Nevada, Utah and Idaho</p>
+            <p><mark class="todo">[Street address]</mark><br>Henderson, NV <mark class="todo">[ZIP]</mark></p>
+            <p><a href="tel:+17252593889">725-259-3889</a></p>
+            <p><mark class="todo">[Email address]</mark></p>
+            <p class="meta">Hours: by appointment. Telehealth in Nevada, Utah and Idaho.</p>
           </address>
         </div>
       </div>
       <div class="site-footer__legal cluster">
-        <p class="meta">&copy; 2026 Dr. Stephen Sharp</p>
-        <a class="meta" href="privacy.html">Privacy policy</a>
-        <a class="meta" href="accessibility.html">Accessibility</a>
+        <p class="meta">&copy; 2026 Integrated Wellness &amp; Counseling</p>
+        <!-- TODO: add links to privacy.html and accessibility.html once those pages exist -->
       </div>
     </div>
   </footer>

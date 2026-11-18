@@ -8,7 +8,7 @@
    below is a multiple of 4px (0.4rem). Media queries use em, which are always
    based on the browser default (16px), not on the 62.5% root.
    Breakpoints: 48em (768px) tablet, 64em (1024px) desktop,
-   80em (1280px) full header nav.
+   84em (1344px) full header nav; 90em (1440px) four steps in a row.
    ========================================================================== */
 
 @layer reset, tokens, base, layout, components, utilities;
@@ -159,14 +159,22 @@
 
     /* Sizing */
     --measure: 65ch;             /* max line length for running text */
-    --container: 120rem;         /* 1200px */
+    --container: 136rem;         /* 1360px: fits the one-row header at 1440px */
+    --logo-height: 4.4rem;       /* mark alone on phones; full logo (332:75) from 48em */
     --tap-target: 4.4rem;        /* 44px — above WCAG 2.2 AA 24px minimum */
     --border-width: 0.1rem;
     --focus-width: 0.3rem;
 
+    /* Elevation (dropdown only) */
+    --shadow-raised: 0 1.2rem 3.2rem rgb(42 38 34 / 0.25);
+
     /* Motion */
     --duration-fast: 150ms;
     --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  @media (min-width: 48em) {
+    :root { --logo-height: 5.6rem; }
   }
 
   @media (min-width: 64em) {
@@ -209,7 +217,10 @@
     background-color: var(--surface-inverse);
     color: var(--text);
   }
-  .theme-alt { background-color: var(--surface-alt); }
+  .theme-alt {
+    --callout-bg: var(--surface-page);
+    background-color: var(--surface-alt);
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -219,17 +230,6 @@
   html {
     font-size: 62.5%;            /* 1rem = 10px; still scales with user settings */
     scroll-behavior: smooth;
-  }
-  body {
-    min-height: 100vh;
-    background-color: var(--surface-page);
-    color: var(--text);
-    font-family: var(--font-body);
-    font-weight: var(--weight-regular);
-    font-size: var(--text-body);
-    line-height: var(--leading-body);
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
   }
 
   /* Headings share one rule; size is the only difference */
@@ -312,12 +312,21 @@
     gap: var(--grid-gap, var(--space-24));
   }
 
+  .grid--narrow { --grid-min: 26rem; }
+  .grid--wide { --grid-min: 30rem; }
+
+  /* Lists, grids and forms inside a stack take the full width */
+  .stack > :is(.grid, .ticks, .steps, .faq, .form, .contact-list) { align-self: stretch; }
+
   /* Two columns on desktop, stacked on phones */
+  /* Columns align to the top; add .split--center where a photo sits beside text */
   .split {
     display: grid;
     gap: var(--space-40);
-    align-items: center;
+    align-items: start;
   }
+  .split--center,
+  .hero .split { align-items: center; }
   .split > * { min-width: 0; }
   @media (min-width: 64em) {
     .split { grid-template-columns: 1fr 1fr; gap: var(--space-80); }
@@ -347,11 +356,25 @@
   .skip-link:focus { transform: none; }
 
   /* Small bold sentence-case label above headings (never all caps) */
+  /* Three short rays before each label, drawn from the logo's sun */
   .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: var(--space-12);
     font-size: var(--text-label);
     font-weight: var(--weight-label);
     color: var(--text-accent);
     line-height: var(--leading-snug);
+  }
+  .eyebrow::before {
+    content: "";
+    flex-shrink: 0;
+    width: var(--space-32);
+    height: var(--space-12);
+    background:
+      linear-gradient(currentColor, currentColor) right top / var(--space-20) 0.2rem no-repeat,
+      linear-gradient(currentColor, currentColor) right center / 100% 0.2rem no-repeat,
+      linear-gradient(currentColor, currentColor) right bottom / var(--space-20) 0.2rem no-repeat;
   }
 
   .lead {
@@ -416,26 +439,40 @@
   }
   .link-arrow:hover::after { transform: translateX(var(--space-4)); }
 
-  /* ---------- Header ---------- */
+  /* ---------- Header ----------
+     One row at every width. Order in the markup: logo, menu button, nav,
+     phone, consultation button. Visual order is set with `order`.
+       Phones:        mark, phone, menu button
+       768px and up:  full logo, phone, menu button
+       1024px and up: + consultation button
+       1344px and up: full nav replaces the menu button
+     The open menu drops below the row on smaller screens. */
   .site-header { position: relative; z-index: 10; }
   .site-header__bar {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: var(--space-16);
+    gap: var(--space-12) var(--space-16);
     padding-block: var(--space-12);
   }
   .site-header__logo { flex-shrink: 0; display: block; }
-  .site-header__logo img { width: auto; height: 5.6rem; }
+  .site-header__logo img,
+  .site-footer__logo { width: auto; height: var(--logo-height); }
+
   .site-header__call {
+    order: 1;
     margin-left: auto;
-    white-space: nowrap;
     display: inline-flex;
     align-items: center;
     min-height: var(--tap-target);
+    white-space: nowrap;
+    font-size: var(--fs-16);
     font-weight: var(--weight-label);
   }
+  .site-header__cta { order: 2; display: none; font-size: var(--fs-16); white-space: nowrap; }
+
   .menu-toggle {
+    order: 3;
     display: inline-flex;
     align-items: center;
     gap: var(--space-8);
@@ -466,7 +503,7 @@
   [aria-expanded="true"] > .menu-toggle__icon::before { transform: translateY(0.5rem) rotate(45deg); }
   [aria-expanded="true"] > .menu-toggle__icon::after { transform: translateY(-0.5rem) rotate(-45deg); }
 
-  .site-nav { flex-basis: 100%; }
+  .site-nav { order: 4; flex-basis: 100%; }
   .site-nav__list {
     display: flex;
     flex-direction: column;
@@ -486,16 +523,60 @@
   .site-nav__list a[aria-current="page"] { text-decoration: underline; }
   .site-nav__cta { margin-top: var(--space-8); }
 
+  /* "Who we help" dropdown: a disclosure button that shows a list of links.
+     Phones and tablets: expands in place inside the menu. Desktop: a panel. */
+  .nav-group__toggle {
+    display: flex;
+    align-items: center;
+    gap: var(--space-12);
+    width: 100%;
+    min-height: var(--tap-target);
+    padding: 0;
+    border: 0;
+    background: transparent;
+    font-weight: var(--weight-ui);
+    text-align: left;
+    cursor: pointer;
+  }
+  .nav-group__toggle::after {
+    content: "";
+    width: 0.8rem;
+    height: 0.8rem;
+    border-right: 0.2rem solid currentColor;
+    border-bottom: 0.2rem solid currentColor;
+    transform: translateY(-0.2rem) rotate(45deg);
+    transition: transform var(--duration-fast) var(--ease-out);
+  }
+  .nav-group__toggle[aria-expanded="true"]::after { transform: translateY(0.2rem) rotate(-135deg); }
+  .nav-group__toggle:hover,
+  .nav-group__toggle.is-current { text-decoration: underline; }
+  .nav-group__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding: 0 0 var(--space-8) var(--space-20);
+  }
+  .nav-group__list[hidden] { display: none; }
+
   /* Without JS the menu stays open; JS sets data-menu to collapse it */
   .site-header[data-menu="closed"] .site-nav { display: none; }
 
-  /* Full nav needs ~1240px with Manrope, so it gets its own breakpoint */
-  @media (min-width: 80em) {
-    .site-header__bar { flex-wrap: nowrap; gap: var(--space-24); }
-    .site-header__call { order: 3; margin-left: 0; }
+  @media (min-width: 48em) {
+    .site-header__bar { column-gap: var(--space-24); }
+    .site-header__call { font-size: var(--fs-20); }
+  }
+  /* The consultation button moves out of the menu into the bar */
+  @media (min-width: 64em) {
+    .site-header__cta { display: inline-flex; }
+    .site-nav__cta { display: none; }
+  }
+  @media (min-width: 84em) {
+    .site-header__bar { flex-wrap: nowrap; column-gap: var(--space-20); }
+    .site-header__cta { padding-inline: var(--space-20); }
     .menu-toggle { display: none; }
     .site-header[data-menu] .site-nav { display: block; }
-    .site-nav { flex-basis: auto; margin-left: auto; }
+    .site-nav { order: 0; flex-basis: auto; margin-left: auto; }
+    .site-header__call { margin-left: 0; }
     .site-nav__list {
       flex-direction: row;
       align-items: center;
@@ -503,14 +584,48 @@
       padding: 0;
       border: 0;
     }
-    .site-nav__list a { font-size: var(--fs-16); }
-    .site-nav__list .btn { padding-inline: var(--space-20); }
-    .site-nav__cta { margin-top: 0; }
+    .site-nav__list a,
+    .nav-group__toggle { font-size: var(--fs-16); }
+    .nav-group { position: relative; }
+    .nav-group__toggle { width: auto; gap: var(--space-8); }
+    .site-header[data-menu] .nav-group__list {
+      position: absolute;
+      top: calc(100% + var(--space-16));
+      left: calc(var(--space-20) * -1);
+      z-index: 20;
+      min-width: 30rem;
+      padding: var(--space-12) var(--space-20);
+      border-radius: var(--radius-4);
+      background-color: var(--color-maroon-900);
+      box-shadow: var(--shadow-raised);
+    }
   }
 
   /* ---------- Hero ---------- */
   .hero { padding-block: var(--space-48) var(--section-pad); }
   @media (min-width: 64em) { .hero { padding-top: var(--space-80); } }
+
+  /* Closing band: a faint, oversized sun from the logo behind the text */
+  .sun-band {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .sun-band::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    right: -6rem;
+    bottom: -8rem;
+    width: 32rem;
+    aspect-ratio: 93 / 75;
+    background: url("../img/mark-reversed.svg") center / contain no-repeat;
+    opacity: 0.1;
+    pointer-events: none;
+  }
+  @media (min-width: 64em) {
+    .sun-band::after { width: 56rem; right: 4%; bottom: -12rem; }
+  }
 
   /* ---------- Image placeholder (swap for <picture> before launch) ---------- */
   .media-placeholder {
@@ -527,6 +642,72 @@
     font-size: var(--text-label);
   }
 
+  /* ---------- Photos ----------
+     Every photo uses its original, uncropped file. The frame sets the shape,
+     and the image fills it. Framing is set per spot under "Photo framing" below. */
+  .photo {
+    display: block;
+    overflow: hidden;
+    aspect-ratio: var(--frame-ratio, auto);
+    border-radius: var(--radius-4);
+  }
+  .photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--frame-focus, 50% 50%);
+    transform: scale(var(--frame-zoom, 1));
+    transform-origin: var(--frame-focus, 50% 50%);
+  }
+  /* The headshot source is 430px wide: cap heroes so it never scales past that */
+  .photo--hero { width: 100%; max-width: 43rem; }
+  .photo--circle { flex-shrink: 0; width: 12.8rem; border-radius: var(--radius-pill); }
+
+  /* ---------- Photo framing: adjust each spot here ----------
+     --frame-ratio  shape of the frame: 1 / 1 square, 4 / 5 portrait, 4 / 3 landscape
+     --frame-focus  the point to keep in view: "50% 50%" is the center,
+                    "50% 30%" moves the view up toward the top of the head
+     --frame-zoom   1 shows the whole photo; 1.2 zooms in 20% around the focus point
+     Zoom crops the edges, so raise it in small steps and check the chin and hair. */
+  .frame-about      { --frame-ratio: 1 / 1; --frame-focus: 50% 50%; --frame-zoom: 1; }
+  .frame-healthcare { --frame-ratio: 1 / 1; --frame-focus: 50% 40%; --frame-zoom: 1.15; }
+  .frame-card       { --frame-ratio: 1 / 1; --frame-focus: 50% 40%; --frame-zoom: 1.2; }
+  .frame-note       { --frame-ratio: 1 / 1; --frame-focus: 50% 40%; --frame-zoom: 1.2; }
+
+  /* Small square image at the top of a path card */
+  .card__media {
+    width: 16rem;
+    max-width: 100%;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: var(--radius-4);
+  }
+  .card__media > * { height: 100%; }
+  .card__media .media-placeholder {
+    aspect-ratio: auto;
+    padding: var(--space-12);
+    border-radius: 0;
+  }
+
+  /* Round headshot beside a signed note: stacked on phones, side by side from 48em */
+  .byline-photo {
+    display: grid;
+    gap: var(--space-24);
+  }
+  @media (min-width: 48em) {
+    .byline-photo { grid-template-columns: auto 1fr; gap: var(--space-40); align-items: start; }
+  }
+
+  /* NeuralChek illustration: beats at uneven intervals over a breathing curve */
+  .hrv { width: 100%; height: auto; overflow: visible; }
+  .hrv path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .hrv__grid path { stroke: var(--border-default); stroke-width: 1; stroke-dasharray: 4 6; }
+  .hrv__breath { stroke: var(--border-strong); stroke-width: 2; opacity: 0.5; }
+  .hrv__gaps path { stroke: var(--border-strong); stroke-width: 1.5; }
+  .hrv__pulse { stroke: var(--text-accent); stroke-width: 3; }
+  .hrv__dots circle { fill: var(--text-accent); }
+
   /* ---------- Section heading block ---------- */
   .section-head { --stack-gap: var(--space-16); margin-bottom: var(--space-48); }
 
@@ -539,7 +720,9 @@
     border-top: 0.3rem solid var(--surface-brand);
     border-radius: var(--radius-4);
   }
-  .card .link-arrow { margin-top: auto; }
+  .card .link-arrow,
+  .card .btn { margin-top: auto; }
+  .card :is(h2, h3) { font-size: var(--text-h4); }
 
   /* ---------- Numbered steps (a real sequence) ---------- */
   .steps {
@@ -568,20 +751,48 @@
   }
   .steps__item > * { grid-column: 2; }
   .steps__item > h3 { grid-row: 1; align-self: center; }
+
+  /* Icon in place of the number (the list stays an <ol>, so order is kept) */
+  .steps--icons .steps__item::before { content: none; }
+  .steps__icon {
+    grid-column: 1;
+    grid-row: 1;
+    display: grid;
+    place-items: center;
+    width: var(--space-48);
+    height: var(--space-48);
+    border: var(--border-width) solid var(--text-accent);
+    border-radius: var(--radius-pill);
+    color: var(--text-accent);
+  }
+  .steps__icon svg { width: var(--space-32); height: var(--space-32); }
+  /* Three steps sit in a row from 64em. Four steps: 2 by 2, then a row at 90em */
+  @media (min-width: 48em) {
+    .steps--4 { grid-template-columns: repeat(2, 1fr); }
+  }
   @media (min-width: 64em) {
-    .steps { grid-template-columns: repeat(3, 1fr); }
+    .steps:not(.steps--4) { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (min-width: 90em) {
+    .steps--4 { grid-template-columns: repeat(4, 1fr); }
   }
 
   /* ---------- Checklist (uses for) ---------- */
   .ticks {
     display: grid;
     gap: var(--space-12) var(--space-32);
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 36rem), 1fr));
   }
   .ticks li {
     display: flex;
     gap: var(--space-12);
     align-items: baseline;
+  }
+  .ticks--stack { grid-template-columns: 1fr; }
+  .ticks--compact {
+    gap: var(--space-8) var(--space-24);
+    font-size: var(--text-label);
+    color: var(--text-muted);
   }
   .ticks li::before {
     content: "";
@@ -613,6 +824,129 @@
     font-size: var(--text-h3);
     line-height: var(--leading-snug);
   }
+
+  /* ---------- Callout: prices, safety notes, things to read first ---------- */
+  .callout {
+    --stack-gap: var(--space-12);
+    padding: var(--space-24);
+    border-left: 0.3rem solid var(--surface-brand);
+    border-radius: 0 var(--radius-4) var(--radius-4) 0;
+    background-color: var(--callout-bg, var(--surface-alt));
+  }
+  .callout h3 { font-size: var(--text-h4); }
+
+  /* ---------- Missing facts still to supply (remove before launch) ---------- */
+  .todo {
+    padding-inline: var(--space-4);
+    border-radius: var(--radius-2);
+    background-color: var(--color-rose-200);
+    color: var(--color-charcoal);
+  }
+
+  /* ---------- Wellness disclaimer at the foot of a page ---------- */
+  .disclaimer {
+    padding-block: var(--space-32);
+    border-top: var(--border-width) solid var(--border-default);
+  }
+
+  /* ---------- Forms (visual only until a HIPAA-compliant service is connected) ---------- */
+  .form {
+    --stack-gap: var(--space-24);
+    align-items: stretch;
+    max-width: 64rem;
+  }
+  .field { display: grid; gap: var(--space-8); }
+  .field__label,
+  .choices legend {
+    font-size: var(--text-label);
+    font-weight: var(--weight-label);
+  }
+  .field__hint {
+    font-size: var(--text-label);
+    color: var(--text-muted);
+  }
+  .field__error {
+    font-size: var(--text-label);
+    font-weight: var(--weight-label);
+    color: var(--color-maroon-700);
+  }
+  .field__error[hidden] { display: none; }
+  .input {
+    width: 100%;
+    min-height: var(--space-48);
+    padding: var(--space-8) var(--space-12);
+    border: var(--border-width) solid var(--border-strong);
+    border-radius: var(--radius-4);
+    background-color: var(--surface-page);
+  }
+  .input:focus { border-color: var(--surface-brand); }
+  .input[aria-invalid="true"] { border: 0.2rem solid var(--color-maroon-700); }
+  .choices {
+    display: grid;
+    gap: var(--space-4);
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+  .choices legend { margin-bottom: var(--space-8); padding: 0; }
+  .choice {
+    display: flex;
+    align-items: center;
+    gap: var(--space-12);
+    min-height: var(--tap-target);
+    cursor: pointer;
+  }
+  .choice input {
+    flex-shrink: 0;
+    width: 2.4rem;
+    height: 2.4rem;
+    margin: 0;
+    accent-color: var(--surface-brand);
+  }
+  .form__status:focus { outline: none; }
+
+  /* ---------- FAQ: native details/summary, no script needed ---------- */
+  .faq {
+    max-width: 88rem;
+    border-top: var(--border-width) solid var(--border-default);
+  }
+  .faq__item { border-bottom: var(--border-width) solid var(--border-default); }
+  .faq__item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-16);
+    min-height: var(--tap-target);
+    padding-block: var(--space-16);
+    font-family: var(--font-display);
+    font-size: var(--text-h4);
+    font-weight: var(--weight-heading-small);
+    line-height: var(--leading-snug);
+    list-style: none;
+    cursor: pointer;
+  }
+  .faq__item summary::-webkit-details-marker { display: none; }
+  .faq__item summary::after {
+    content: "+";
+    flex-shrink: 0;
+    color: var(--text-accent);
+    font-family: var(--font-body);
+    font-size: var(--fs-28);
+    line-height: 1;
+  }
+  .faq__item[open] summary::after { content: "\2212"; }
+  .faq__answer { padding-bottom: var(--space-24); }
+
+  /* ---------- Contact details (label / value pairs) ---------- */
+  .contact-list {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: var(--space-8) var(--space-24);
+    margin: 0;
+  }
+  .contact-list dt { font-weight: var(--weight-label); }
+  .contact-list dd { margin: 0; min-width: 0; }
 
   /* ---------- Footer ---------- */
   .site-footer { padding-block: var(--space-64) var(--space-40); }
@@ -655,4 +989,23 @@
     white-space: nowrap;
     border: 0;
   }
+}
+
+/* --------------------------------------------------------------------------
+   Page base — deliberately outside the layers.
+   Unlayered CSS always beats layered CSS, so a host or third-party stylesheet
+   that styles `body` (a preview wrapper, a form or chat embed) would otherwise
+   replace the ivory background and Manrope. Keep this block small.
+   -------------------------------------------------------------------------- */
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--surface-page);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-weight: var(--weight-regular);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
