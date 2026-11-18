@@ -747,6 +747,7 @@
     grid-template-columns: var(--space-48) 1fr;
     gap: var(--space-16) var(--space-20);
     counter-increment: step;
+    align-content: start;
   }
   .steps__item::before {
     content: counter(step);
