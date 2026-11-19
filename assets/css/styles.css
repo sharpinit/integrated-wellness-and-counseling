@@ -19,14 +19,6 @@
 /* Variable fonts: one file per family covers every weight we use.
    The weight range is limited to the weights the design system allows. */
 @font-face {
-  font-family: "Cormorant Garamond";
-  src: url("../fonts/cormorant-garamond-var.woff2") format("woff2-variations"),
-       url("../fonts/cormorant-garamond-var.woff2") format("woff2");
-  font-weight: 500 600;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
   font-family: "Manrope";
   src: url("../fonts/manrope-var.woff2") format("woff2-variations"),
        url("../fonts/manrope-var.woff2") format("woff2");
@@ -34,6 +26,15 @@
   font-style: normal;
   font-display: swap;
 }
+@import url('https://fonts.googleapis.com/css2?family=Martel:wght@200;300;400;600;700;800;900&display=swap');
+
+.martel-regular {
+  font-family: "Martel", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
 
 /* --------------------------------------------------------------------------
    Reset — only what this site needs
@@ -88,17 +89,17 @@
     --rule: var(--border-default);
 
     /* Font families */
-    --font-display: "Cormorant Garamond", Garamond, "EB Garamond", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    --font-display: "Martel", Garamond, "EB Garamond", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
     --font-body: "Manrope", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
 
     /* Font weights — primitives (only these are shipped) */
     --weight-regular: 400;     /* Manrope: body */
     --weight-medium: 500;      /* Manrope: interface. Cormorant: large headings */
-    --weight-semibold: 600;    /* Cormorant only: smaller headings */
+    --weight-semibold: 400;    /* Cormorant only: smaller headings */
     --weight-bold: 700;        /* Manrope only: labels, buttons, emphasis */
 
     /* Font-weight roles */
-    --weight-heading: var(--weight-medium);        /* h1, h2 */
+    --weight-heading: var(--weight-semibold);        /* h1, h2 */
     --weight-heading-small: var(--weight-semibold); /* h3 and below; holds up at small sizes */
     --weight-ui: var(--weight-medium);             /* nav and secondary interface text */
     --weight-label: var(--weight-bold);            /* eyebrows, buttons, action links */
