@@ -10,7 +10,7 @@
   <meta name="theme-color" content="#7c1315">
   <meta name="format-detection" content="telephone=no">
 
-  <link rel="preload" href="assets/fonts/cormorant-garamond-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/martel-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/manrope-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/styles.css">
   <script src="assets/js/main.js" defer></script>
@@ -74,9 +74,13 @@
     </div>
     <picture class="photo">
       <img
-        src="assets/img/Headset_Male.JPG"
+        src="assets/img/headset-relaxing-1200.webp"
+        srcset="assets/img/headset-relaxing-640.webp 640w,
+                assets/img/headset-relaxing-1200.webp 1200w"
+        sizes="(min-width: 1024px) 540px, 100vw"
         alt="Relaxed man wearing Braintap headset"
-        loading="lazy" decoding="async">
+        width="1200" height="800"
+        fetchpriority="high" decoding="async">
     </picture>
   </div>
 </section>
@@ -95,15 +99,19 @@
         <p>Many people use BrainTap for 20 minutes a day as a routine for deep relaxation.</p>
         <picture class="photo">
           <img
-            src="assets/img/Woman_Outdoors.JPG"
+            src="assets/img/woman-outdoors-1200.webp"
+            srcset="assets/img/woman-outdoors-640.webp 640w,
+                    assets/img/woman-outdoors-1200.webp 1200w"
+            sizes="(min-width: 1024px) 640px, 100vw"
             alt="women in nature, relaxed, and wearing Braintap headset"
+            width="1200" height="800"
             loading="lazy" decoding="async">
         </picture>
       </div>
       <div class="stack">
         <h3>What clients use it for</h3>
         <ul class="ticks ticks--stack" role="list"><li><span>Winding down from a stressful stretch</span></li><li><span>Practicing calm before high-pressure moments, like a presentation, a performance or a hard conversation</span></li><li><span>Adding a relaxation practice alongside therapy</span></li><li><span>Easing the tension that builds up with ongoing stress</span></li></ul>
-        <p>With thousands of guided sessions, there’s one for most goals, from winding down to getting ready for a big day. Everyone responds differently, and results vary from person to person.</p>
+        <p>With thousands of guided sessions, there’s one for most goals, from winding down to getting ready for a big day.</p>
       </div>
     </div>
   </div>
@@ -137,8 +145,10 @@
       </div>
       <div class="stack">
         <h2 id="research-title">What the research says</h2>
-        <p>Research on guided relaxation is well established. Research on light and sound is promising but still developing.</p>
-        <p>Brainwaves are the rhythms your brain creates as it processes the world around you. Researchers are still learning how light and sound affect them.</p>
+        <p>Guided relaxation has a long, well-established track record for easing stress.</p>
+        <p>Your brain produces rhythms called brainwaves. Five main types (delta, theta, alpha, beta and gamma) are linked to different mental states, from deep sleep to alert focus.</p>
+        <p>The calming effect of flickering light was noticed long before modern science. In the early 1900s, psychologist Pierre Janet observed that his patients felt less strain while watching flickering light, and researchers have studied light and sound stimulation ever since.</p>
+        <p>Today, studies suggest light and sound stimulation may support relaxation, sleep and focus, though scientists are still learning exactly how it works. Light, music and natural sounds are also known to support mood and ease stress.</p>
       </div>
     </div>
   </div>
@@ -170,7 +180,7 @@
   </div>
 </section>
 <aside class="disclaimer" aria-label="Wellness services disclaimer">
-  <div class="container"><p class="meta">BrainTap and NeuralChek are general wellness services. They are not FDA-cleared or approved to diagnose, treat, cure or prevent any disease or mental health condition, and they don’t replace professional evaluation or treatment. NeuralChek readings are for education only and are not a medical or mental health assessment. BrainTap uses flashing lights and isn’t suitable for people with epilepsy, a history of seizures or light sensitivity. Individual experiences vary.</p></div>
+  <div class="container"><p class="meta">BrainTap and NeuralChek are general wellness services. They are not FDA-cleared to diagnose, treat, cure or prevent any disease, and they aren’t covered by insurance. BrainTap uses flashing lights, so please tell us if you have epilepsy, a history of seizures or light sensitivity.</p></div>
 </aside>
   </main>
 
@@ -196,6 +206,7 @@
         </div>
       </div>
       <div class="site-footer__legal cluster">
+        <p class="meta site-footer__note">BrainTap and NeuralChek are general wellness services. They are not FDA-cleared and aren’t covered by insurance.</p>
         <p class="meta">&copy; 2026 Integrated Wellness &amp; Counseling</p>
         <!-- TODO: add links to privacy.html and accessibility.html once those pages exist -->
       </div>

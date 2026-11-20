@@ -26,12 +26,14 @@
   font-style: normal;
   font-display: swap;
 }
-@import url('https://fonts.googleapis.com/css2?family=Martel:wght@200;300;400;600;700;800;900&display=swap');
-
-.martel-regular {
-  font-family: "Martel", serif;
+/* Martel (headings): self-hosted Latin subset. Headings only use Regular (400),
+   so that is the only weight shipped. Add more files here if that changes. */
+@font-face {
+  font-family: "Martel";
+  src: url("../fonts/martel-400.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
 
 
@@ -94,8 +96,8 @@
 
     /* Font weights — primitives (only these are shipped) */
     --weight-regular: 400;     /* Manrope: body */
-    --weight-medium: 500;      /* Manrope: interface. Cormorant: large headings */
-    --weight-semibold: 400;    /* Cormorant only: smaller headings */
+    --weight-medium: 500;      /* Manrope: interface */
+    --weight-semibold: 400;    /* Martel headings (Regular; the only weight shipped) */
     --weight-bold: 700;        /* Manrope only: labels, buttons, emphasis */
 
     /* Font-weight roles */
@@ -932,6 +934,8 @@
     align-items: center;
     min-height: var(--tap-target);
   }
+  /* Wellness note: its own full-width line above the copyright */
+  .site-footer__note { flex-basis: 100%; max-width: none; }
   .site-footer__legal {
     --cluster-gap: var(--space-24);
     margin-top: var(--space-48);

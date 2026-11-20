@@ -10,7 +10,7 @@
   <meta name="theme-color" content="#7c1315">
   <meta name="format-detection" content="telephone=no">
 
-  <link rel="preload" href="assets/fonts/cormorant-garamond-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/martel-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/manrope-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/styles.css">
   <script src="assets/js/main.js" defer></script>
@@ -73,9 +73,13 @@
     </div>
     <picture class="photo">
       <img
-        src="assets/img/warm-interior.webp"
+        src="assets/img/warm-interior-1024.webp"
+        srcset="assets/img/warm-interior-640.webp 640w,
+                assets/img/warm-interior-1024.webp 1024w"
+        sizes="(min-width: 1024px) 540px, 100vw"
         alt="Hot cup of tea sits on the table nestled in a tablecloth and books"
-        loading="lazy" decoding="async">
+        width="1024" height="765"
+        fetchpriority="high" decoding="async">
     </picture>
   </div>
 </section>
@@ -151,6 +155,7 @@
         </div>
       </div>
       <div class="site-footer__legal cluster">
+        <p class="meta site-footer__note">BrainTap and NeuralChek are general wellness services. They are not FDA-cleared and aren’t covered by insurance.</p>
         <p class="meta">&copy; 2026 Integrated Wellness &amp; Counseling</p>
         <!-- TODO: add links to privacy.html and accessibility.html once those pages exist -->
       </div>

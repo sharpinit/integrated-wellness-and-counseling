@@ -10,7 +10,7 @@
   <meta name="theme-color" content="#7c1315">
   <meta name="format-detection" content="telephone=no">
 
-  <link rel="preload" href="assets/fonts/cormorant-garamond-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/martel-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/manrope-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/styles.css">
   <script src="assets/js/main.js" defer></script>
@@ -112,9 +112,13 @@
     </div>
     <picture class="photo">
       <img
-        src="assets/img/calm still adult.webp"
+        src="assets/img/calm-still-adult-1024.webp"
+        srcset="assets/img/calm-still-adult-640.webp 640w,
+                assets/img/calm-still-adult-1024.webp 1024w"
+        sizes="(min-width: 1024px) 540px, 100vw"
         alt="Woman relaxed at the gym, after a hard session of yoga"
-        loading="lazy" decoding="async">
+        width="1024" height="765"
+        fetchpriority="high" decoding="async">
     </picture>
   </div>
 </section>
@@ -151,8 +155,10 @@
         <div class="card__media">
           <picture class="photo frame-card">
             <img
-              src="assets/img/BT Headset & App.png"
-              sizes="16rem"
+              src="assets/img/braintap-headset-app-320.webp"
+              srcset="assets/img/braintap-headset-app-160.webp 160w,
+                      assets/img/braintap-headset-app-320.webp 320w"
+              sizes="160px"
               alt="BrainTap headset product"
               width="430" height="430"
               loading="lazy" decoding="async">
@@ -202,9 +208,6 @@
     <p class="meta">Your inquiry is private and confidential.</p>
   </div>
 </section>
-<aside class="disclaimer" aria-label="Wellness services disclaimer">
-  <div class="container"><p class="meta">BrainTap and NeuralChek are general wellness services, not medical or mental health treatment. Individual experiences vary.</p></div>
-</aside>
   </main>
 
   <footer class="site-footer theme-inverse">
@@ -229,6 +232,7 @@
         </div>
       </div>
       <div class="site-footer__legal cluster">
+        <p class="meta site-footer__note">BrainTap and NeuralChek are general wellness services. They are not FDA-cleared and aren’t covered by insurance.</p>
         <p class="meta">&copy; 2026 Integrated Wellness &amp; Counseling</p>
         <!-- TODO: add links to privacy.html and accessibility.html once those pages exist -->
       </div>
